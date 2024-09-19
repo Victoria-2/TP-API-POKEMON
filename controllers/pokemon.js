@@ -2,10 +2,11 @@ const axios = require('axios')
 const { request, response } = require('express')
 
 const getPokemon = (req = request, res = response) => {
-  const { idPokemon = '' } = req.query
+  const { idPokemon = '' } = req.params
   console.log(idPokemon)
 
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`) // por algun motivo me duvuelve todos en vez de uno solo (?
+  // axios.get(`https://pokeapi.co/api/v2/pokemon/?idPokemon=${idPokemon}`) // por algun motivo me duvuelve todos en vez de uno solo (?
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`)
     .then((response) => {
       const { data } = response
       console.log(data)
