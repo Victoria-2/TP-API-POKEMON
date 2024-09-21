@@ -1,8 +1,14 @@
 const axios = require('axios')
 const { request, response } = require('express')
 
-const getPokemonAll = (req = request, res = response) => {
-  axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50') // muestra 50 pokemon
+const getPokemonAllQuery = (req = request, res = response) => {
+  const { offset = '', limit = '' } = req.query
+  console.log(offset, limit)
+
+  const filtro1 = (offset) ? `?offset=${offset}` : '?offset=0'
+  const filtro2 = (limit) ? `&limit=${offset}` : '&limit=50'
+
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${filtro1}${filtro2}`) // muestra 50 pokemon
     .then((response) => {
       const { data } = response
       console.log(data)
@@ -75,7 +81,7 @@ const getPokemonName = (req = request, res = response) => {
 }
 
 module.exports = {
-  getPokemonAll,
+  getPokemonAllQuery,
   getPokemonId,
   getPokemonName
 }
