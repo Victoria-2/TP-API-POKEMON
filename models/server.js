@@ -14,6 +14,10 @@ class Server {
 
   rutas () {
     this.app.use('/api/v1/pokemons', require('../routes/pokemon.js')) // este seria el primer integrante
+
+    this.app.use('*', (req, res) => {
+      res.status(404).send('Error. Page not found')
+    })
   }
 
   listen () {
