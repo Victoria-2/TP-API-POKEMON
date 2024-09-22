@@ -1,11 +1,11 @@
 /* eslint-disable */
-import { Router } from "express";
-import { getMoveById, getMoves, getMoveByType } from "../controllers/pokemonControllers.js";
+const { Router } = require("express");
+const { getMoveById, getMoves, getMoveByType } = require("../controllers/habilidadesController.js");
 
 const rutas= Router();
 
 rutas.get('/movimientos-totales', getMoves);
-rutas.get('/movimientos-tipo', getMoveByType)
+rutas.get('/movimientos-tipo', getMoveByType);
 rutas.get('/:id', getMoveById);
 
-export default rutas;
+module.exports = rutas;
