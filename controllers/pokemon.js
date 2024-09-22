@@ -5,10 +5,14 @@ const getPokemonAllQuery = (req = request, res = response) => {
   const { offset = '', limit = '' } = req.query
   console.log(offset, limit)
 
-  const filtro1 = (offset) ? `?offset=${offset}` : '?offset=0'
-  const filtro2 = (limit) ? `&limit=${offset}` : '&limit=50'
+  if (isNaN(Number(offset)) || isNaN(Number(limit)) || Number(offset) < 0 || Number(limit) < 1 || !(Number.isInteger(offset)) || !(Number.isInteger(limit))) {
+    return res.status(400).json({ msg: 'Debe ingresar numeros validos para los limites!' })
+  }
 
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${filtro1}${filtro2}`) // muestra 50 pokemon
+  const filtro1 = (offset) ? `?offset=${offset}` : '?offset=0'
+  const filtro2 = (limit) ? `&limit=${limit}` : '&limit=50' // muestra 50 pokemon
+
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${filtro1}${filtro2}`)
     .then((response) => {
       const { data } = response
       console.log(data)
@@ -30,6 +34,12 @@ const getPokemonId = (req = request, res = response) => {
   const { idPokemon = '' } = req.params
   console.log(idPokemon)
 
+  if (typeof idPokemon === 'number') {
+    if (isNaN(Number(idPokemon)) || Number(idPokemon) < 0 || !(Number.isInteger(idPokemon))) {
+      return res.status(400).json({ msg: 'Debe ingresar un numero valido positivo para buscar el Pokemon!' })
+    }
+  }
+
   axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`)
     .then((response) => {
       const { data } = response
@@ -47,34 +57,7 @@ const getPokemonId = (req = request, res = response) => {
     .catch((error) => {
       console.log(error)
       res.status(400).json({
-        msg: 'Error',
-        error
-      })
-    })
-}
-
-const getPokemonName = (req = request, res = response) => {
-  const { namePokemon = '' } = req.params
-  console.log(namePokemon)
-
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${namePokemon}`)
-    .then((response) => {
-      const { data } = response // tener que responda el nombre, el id, la vida y el tipo o algo asi
-      console.log(data)
-      res.status(200).json({
-        msg: 'OK',
-        data: {
-          id: data.id,
-          name: data.name,
-          xp: data.base_experience,
-          sprite: data.sprites.front_default
-        }
-      })
-    })
-    .catch((error) => {
-      console.log(error)
-      res.status(400).json({
-        msg: 'Error',
+        msg: 'Error, pokemon no encontrado',
         error
       })
     })
@@ -82,6 +65,5 @@ const getPokemonName = (req = request, res = response) => {
 
 module.exports = {
   getPokemonAllQuery,
-  getPokemonId,
-  getPokemonName
+  getPokemonId
 }

@@ -1,11 +1,10 @@
 const { Router } = require('express')
 // eslint-disable-next-line spaced-comment
-const { getPokemonId, getPokemonName, getPokemonAllQuery } = require('../controllers/pokemon')
+const { getPokemonId, getPokemonAllQuery } = require('../controllers/pokemon')
 
 const rutas = Router()
 
 rutas.get('/', getPokemonAllQuery) // todos con Query param
-rutas.get('/:idPokemon', getPokemonId) // por un parametro
-rutas.get('/:namePokemon', getPokemonName) // por un parametro
+rutas.get('/:idPokemon', getPokemonId) // por un parametro, numero o string
 
 module.exports = rutas
