@@ -13,7 +13,8 @@ class Server {
   }
 
   rutas () {
-    this.app.use('/api/v1/pokemons', require('../routes/pokemonRoutes.js')) // este seria el primer integrante
+    this.app.use('/api/v1/pokemons', require('../routes/pokemon.js')) // 1er integrante - Maria Victoria
+    this.app.use('/movimientos', require('../routes/habilidadesRoutes.js')) // 2do integrante - Emiliano
 
     // manejo de errores
     this.app.use('*', (req, res) => {
@@ -25,9 +26,6 @@ class Server {
     this.app.use('*', (req, res) => {
       res.status(500).json({ msg: 'Internal Server Error' })
     })
-    this.app.use('/api/v1/pokemons', require('../routes/pokemon.js')) // 1er integrante - Maria Victoria
-
-    this.app.use('/movimientos', require('../routes/habilidadesRoutes.js')) // 2do integrante - Emiliano
   }
 
   listen () {
