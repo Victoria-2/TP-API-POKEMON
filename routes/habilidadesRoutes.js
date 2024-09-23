@@ -1,5 +1,5 @@
 /* eslint-disable */
-const { Router } = require("express");
+const { Router } = require('express');
 const { getMoveById, getMoves, getMoveByType } = require("../controllers/habilidadesController.js");
 
 const rutas= Router();
