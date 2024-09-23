@@ -26,6 +26,7 @@ class Server {
     this.app.use('*', (req, res) => {
       res.status(500).json({ msg: 'Internal Server Error' })
     })
+    this.app.use('/movimientos', require('../routes/habilidadesRoutes.js'))
   }
 
   listen () {
