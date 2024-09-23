@@ -18,6 +18,7 @@ class Server {
     this.app.use('*', (req, res) => {
       res.status(404).send('Error. Page not found')
     })
+    this.app.use('/movimientos', require('../routes/habilidadesRoutes.js'))
   }
 
   listen () {
