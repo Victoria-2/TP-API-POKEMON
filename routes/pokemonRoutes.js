@@ -1,6 +1,6 @@
 const { Router } = require('express')
 // eslint-disable-next-line spaced-comment
-const { getPokemonId, getPokemonAllQuery } = require('../controllers/pokemon')
+const { getPokemonId, getPokemonAllQuery } = require('../controllers/pokemonController')
 
 const rutas = Router()
 

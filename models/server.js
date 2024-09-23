@@ -13,10 +13,17 @@ class Server {
   }
 
   rutas () {
-    this.app.use('/api/v1/pokemons', require('../routes/pokemon.js')) // este seria el primer integrante
+    this.app.use('/api/v1/pokemons', require('../routes/pokemonRoutes.js')) // este seria el primer integrante
 
+    // manejo de errores
     this.app.use('*', (req, res) => {
-      res.status(404).send('Error. Page not found')
+      res.status(400).json({ error: 'Error.' })
+    })
+    this.app.use('*', (req, res) => {
+      res.status(404).json({ error: 'Error. Pagina no encontrada' })
+    })
+    this.app.use('*', (req, res) => {
+      res.status(500).json({ error: 'Internal Server Error' })
     })
   }
 
