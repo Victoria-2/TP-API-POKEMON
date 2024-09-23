@@ -17,13 +17,13 @@ class Server {
 
     // manejo de errores
     this.app.use('*', (req, res) => {
-      res.status(400).json({ error: 'Error.' })
+      res.status(400).json({ msg: 'Error.' })
     })
     this.app.use('*', (req, res) => {
-      res.status(404).json({ error: 'Error. Pagina no encontrada' })
+      res.status(404).json({ msg: 'Error. Pagina no encontrada' })
     })
     this.app.use('*', (req, res) => {
-      res.status(500).json({ error: 'Internal Server Error' })
+      res.status(500).json({ msg: 'Internal Server Error' })
     })
   }
 
