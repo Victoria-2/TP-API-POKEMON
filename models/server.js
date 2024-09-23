@@ -13,7 +13,7 @@ class Server {
   }
 
   rutas () {
-    this.app.use('/api/v1/pokemons', require('../routes/pokemon.js')) // 1er integrante - Maria Victoria
+    this.app.use('/api/v1/pokemons', require('../routes/pokemonRoutes.js')) // 1er integrante - Maria Victoria
     this.app.use('/movimientos', require('../routes/habilidadesRoutes.js')) // 2do integrante - Emiliano
 
     // manejo de errores
